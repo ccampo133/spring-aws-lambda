@@ -1,0 +1,32 @@
+buildscript {
+    ext {
+        awsLambdaCoreVersion = "1.1.0"
+        springContextVersion = "4.2.6.RELEASE"
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: "java"
+
+group "me.ccampo"
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    // AWS Lambda requires fat jars, so  we include all dependent libraries in the archive "lib" directory.
+    into("lib") {
+        from configurations.runtime
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(":spring-aws-lambda")
+    compile "org.springframework:spring-context:${springContextVersion}"
+    compile "com.amazonaws:aws-lambda-java-core:${awsLambdaCoreVersion}"
+}

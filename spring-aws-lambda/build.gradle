@@ -1,0 +1,52 @@
+buildscript {
+    ext {
+        jetbrainsAnnotationsVersion = "13.0"
+        awsLambdaCoreVersion = "1.1.0"
+        springContextVersion = "4.2.6.RELEASE"
+        junitVersion = "4.12"
+        assertJVersion = "3.4.1"
+        mockitoVersion = "1.10.19"
+        jacksonVersion = "2.7.4"
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: "java"
+apply plugin: "maven"
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = "0.7.5.201505241946"
+}
+
+jar {
+    baseName = "spring-aws-lambda"
+    archivesBaseName = "spring-aws-lambda"
+    manifest {
+        attributes("Implementation-Title": "Library to add Spring support and eliminate some boilerplate with AWS Lambda.")
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "2.13"
+}
+
+group "me.ccampo"
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework:spring-context:${springContextVersion}")
+    compile("org.jetbrains:annotations:${jetbrainsAnnotationsVersion}")
+    compile("com.amazonaws:aws-lambda-java-core:${awsLambdaCoreVersion}")
+    compile("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
+    testCompile("junit:junit:${junitVersion}")
+    testCompile("org.assertj:assertj-core:${assertJVersion}")
+    testCompile("org.mockito:mockito-core:${mockitoVersion}")
+}
