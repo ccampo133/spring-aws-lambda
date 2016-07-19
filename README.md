@@ -1,5 +1,7 @@
 # spring-aws-lambda
 
+[![Build Status](https://travis-ci.org/ccampo133/spring-aws-lambda.svg?branch=master)](https://travis-ci.org/ccampo133/spring-aws-lambda)
+
 A Java library to enable core Spring Framework dependency injection support
 and eliminate some boilerplate around AWS Lambda.
 
