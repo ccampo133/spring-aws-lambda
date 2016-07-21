@@ -16,6 +16,7 @@ buildscript {
 apply plugin: "java"
 apply plugin: "maven"
 apply plugin: "jacoco"
+apply plugin: "signing"
 
 jacoco {
     toolVersion = "0.7.5.201505241946"
@@ -33,7 +34,10 @@ task wrapper(type: Wrapper) {
     gradleVersion = "2.13"
 }
 
-group "me.ccampo"
+group = "me.ccampo"
+archivesBaseName = "spring-aws-lambda"
+version = "1.0.0"
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -50,3 +54,67 @@ dependencies {
     testCompile("org.assertj:assertj-core:${assertJVersion}")
     testCompile("org.mockito:mockito-core:${mockitoVersion}")
 }
+
+task javadocJar(type: Jar) {
+    classifier = "javadoc"
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = "sources"
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    required = false
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name "Spring AWS Lambda"
+                packaging "jar"
+                description "A Java library to enable core Spring Framework dependency injection support and eliminate some boilerplate around AWS Lambda."
+                url "https://github.com/ccampo133/spring-aws-lambda"
+
+                scm {
+                    connection "scm:git:https://github.com/ccampo133/spring-aws-lambda.git"
+                    developerConnection "scm:git:https://github.com/ccampo133/spring-aws-lambda.git"
+                    url "https://github.com/ccampo133/spring-aws-lambda.git"
+                }
+
+                licenses {
+                    license {
+                        name "The MIT License (MIT)"
+                        url "https://raw.githubusercontent.com/ccampo133/spring-aws-lambda/master/LICENSE"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id "ccampo133"
+                        name "Chris Campo"
+                        email "ccampo.progs@gmail.com"
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -50,7 +50,22 @@ Best,
 
 [www.ccampo.me](https://www.ccampo.me)
 
+## Dependency Information
 
+Found on Maven Central (http://search.maven.org)
+
+Gradle:
+
+    compile 'me.ccampo:spring-aws-lambda:1.0.0'
+    
+Maven:
+
+    <dependency>
+      <groupId>me.ccampo</groupId>
+      <artifactId>spring-aws-lambda</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    
 ## Development
 
 ### To Build:

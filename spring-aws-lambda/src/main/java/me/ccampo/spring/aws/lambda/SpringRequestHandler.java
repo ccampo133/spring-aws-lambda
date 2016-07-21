@@ -11,13 +11,14 @@ import org.springframework.context.ApplicationContext;
  * valid {@link ApplicationContext} instance. Your child class that extends
  * this class will be the entry point (handler) to your AWS Lambda function.
  * <p>
- * The {@link SpringRequestHandler#handleRequest(I, Context)}  method is left
- * virtual so it can be overridden, but the default implementation should work
- * for most use cases. It simply grabs a bean of type {@link RequestHandler}
- * and calls that class's {@link RequestHandler#handleRequest(I, Context)}
- * method. In this sense, this class is just a wrapper around your
- * implementation of {@link RequestHandler}, but allows your implementation to
- * take advantage of Spring's core features (dependency injection, etc).
+ * The {@link SpringRequestHandler#handleRequest(Object, Context)} method is
+ * left virtual so it can be overridden, but the default implementation should
+ * work for most use cases. It simply grabs a bean of type
+ * {@link RequestHandler} and calls that class's
+ * {@link RequestHandler#handleRequest(Object, Context)} method. In this sense,
+ * this class is just a wrapper around your implementation of
+ * {@link RequestHandler}, but allows your implementation to take advantage of
+ * Spring's core features (dependency injection, etc).
  *
  * @param <I> The input type parameter. NOTE: this type must match the input
  *            type parameter of your {@link RequestHandler} bean.
