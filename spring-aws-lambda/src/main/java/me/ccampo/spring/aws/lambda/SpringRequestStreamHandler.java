@@ -16,10 +16,15 @@ import java.io.OutputStream;
  */
 public abstract class SpringRequestStreamHandler implements RequestStreamHandler, ApplicationContextProvider {
 
+    private final RequestStreamHandler handler;
+
+    public SpringRequestStreamHandler() {
+        this.handler = getApplicationContext().getBean(RequestStreamHandler.class);
+    }
+
     @Override
     public void handleRequest(final InputStream input, final OutputStream output, final Context context)
             throws IOException {
-        final RequestStreamHandler handler = getApplicationContext().getBean(RequestStreamHandler.class);
         handler.handleRequest(input, output, context);
     }
 }

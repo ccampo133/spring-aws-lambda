@@ -27,10 +27,15 @@ import org.springframework.context.ApplicationContext;
  */
 public abstract class SpringRequestHandler<I, O> implements RequestHandler<I, O>, ApplicationContextProvider {
 
+    private final RequestHandler handler;
+
+    public SpringRequestHandler() {
+        handler = getApplicationContext().getBean(RequestHandler.class);
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public O handleRequest(final I input, final Context context) {
-        final RequestHandler handler = getApplicationContext().getBean(RequestHandler.class);
         return (O) handler.handleRequest(input, context);
     }
 }
