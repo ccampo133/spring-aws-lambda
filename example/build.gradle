@@ -2,6 +2,8 @@ buildscript {
     ext {
         awsLambdaCoreVersion = "1.1.0"
         springContextVersion = "4.2.6.RELEASE"
+        junitVersion = "4.12"
+        assertJVersion = "3.4.1"
     }
     repositories {
         mavenCentral()
@@ -29,4 +31,6 @@ dependencies {
     compile project(":spring-aws-lambda")
     compile "org.springframework:spring-context:${springContextVersion}"
     compile "com.amazonaws:aws-lambda-java-core:${awsLambdaCoreVersion}"
+    testCompile("junit:junit:${junitVersion}")
+    testCompile("org.assertj:assertj-core:${assertJVersion}")
 }

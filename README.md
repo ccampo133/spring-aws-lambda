@@ -1,6 +1,7 @@
 # spring-aws-lambda
 
 [![Build Status](https://travis-ci.org/ccampo133/spring-aws-lambda.svg?branch=master)](https://travis-ci.org/ccampo133/spring-aws-lambda)
+[![Maven Central](https://img.shields.io/maven-central/v/me.ccampo/spring-aws-lambda.svg?style=flat)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22me.ccampo%22%20AND%20a%3A%22spring-aws-lambda%22)
 
 A Java library to enable core Spring Framework dependency injection support
 and eliminate some boilerplate around AWS Lambda.
@@ -56,14 +57,14 @@ Found on Maven Central (http://search.maven.org)
 
 Gradle:
 
-    compile 'me.ccampo:spring-aws-lambda:1.0.0'
+    compile 'me.ccampo:spring-aws-lambda:1.1.0'
     
 Maven:
 
     <dependency>
       <groupId>me.ccampo</groupId>
       <artifactId>spring-aws-lambda</artifactId>
-      <version>1.0.0</version>
+      <version>1.1.0</version>
     </dependency>
     
 ## Development

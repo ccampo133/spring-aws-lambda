@@ -28,6 +28,8 @@ public abstract class JacksonSpringRequestHandler<I, O> extends SpringRequestStr
 
     private final Class<I> inputClass;
 
+    private final RequestHandler handler;
+
     /**
      * To work around type erasure, pass the input type class here. AWS Lambda
      * requires a no-arg constructor for their handler classes however, so be
@@ -37,6 +39,7 @@ public abstract class JacksonSpringRequestHandler<I, O> extends SpringRequestStr
      */
     protected JacksonSpringRequestHandler(@NotNull final Class<I> inputClass) {
         this.inputClass = inputClass;
+        this.handler = getApplicationContext().getBean(RequestHandler.class);
     }
 
     /**
@@ -48,7 +51,6 @@ public abstract class JacksonSpringRequestHandler<I, O> extends SpringRequestStr
     @Override
     public void handleRequest(@NotNull final InputStream input, @NotNull final OutputStream output,
             @NotNull final Context context) throws IOException {
-        final RequestHandler handler = getApplicationContext().getBean(RequestHandler.class);
         final I inObject = getObjectMapper().readValue(input, inputClass);
         @SuppressWarnings("unchecked")
         final O outObject = (O) handler.handleRequest(inObject, context);
