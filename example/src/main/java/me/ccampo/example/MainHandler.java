@@ -39,11 +39,14 @@ public class MainHandler extends SpringRequestHandler<Request, Response> {
      * Here we create the Spring {@link ApplicationContext} that will
      * be used throughout our application.
      */
-    private static final ApplicationContext context =
-            new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 
     @Override
     public ApplicationContext getApplicationContext() {
+        final long t0 = System.currentTimeMillis();
+        final ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
+        final long t1 = System.currentTimeMillis();
+        final long dt = t1 - t0;
+        System.out.println("Application context instantiation complete after " + dt + " ms");
         return context;
     }
 }

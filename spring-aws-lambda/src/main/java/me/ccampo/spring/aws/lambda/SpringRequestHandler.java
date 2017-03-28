@@ -3,6 +3,9 @@ package me.ccampo.spring.aws.lambda;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
 /**
  * Central class to extend to provide Spring support for your AWS Lambda
@@ -28,10 +31,13 @@ import org.springframework.context.ApplicationContext;
 public abstract class SpringRequestHandler<I, O> implements RequestHandler<I, O>, ApplicationContextProvider {
 
     private final RequestHandler handler;
+    private static final long startTime = System.currentTimeMillis();
 
     public SpringRequestHandler() {
-        handler = getApplicationContext().getBean(RequestHandler.class);
+        this.handler = getApplicationContext().getBean(RequestHandler.class);
     }
+
+
 
     @Override
     @SuppressWarnings("unchecked")
