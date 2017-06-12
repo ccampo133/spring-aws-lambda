@@ -1,12 +1,12 @@
 buildscript {
     ext {
-        jetbrainsAnnotationsVersion = "13.0"
+        jetbrainsAnnotationsVersion = "15.0"
         awsLambdaCoreVersion = "1.1.0"
-        springContextVersion = "4.2.6.RELEASE"
+        springContextVersion = "4.3.9.RELEASE"
         junitVersion = "4.12"
-        assertJVersion = "3.4.1"
-        mockitoVersion = "1.10.19"
-        jacksonVersion = "2.7.4"
+        assertJVersion = "3.8.0"
+        mockitoVersion = "2.8.9"
+        jacksonVersion = "2.8.7"
     }
     repositories {
         mavenCentral()
